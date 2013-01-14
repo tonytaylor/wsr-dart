@@ -51,11 +51,11 @@ void main() {
 
   new Timer(5000, (Timer t) {
 
-  connections.forEach((WebSocketConnection connection) {
-    connection.send(getPlaylist());
-  });
+    connections.forEach((WebSocketConnection connection) {
+      connection.send(getPlaylist());
+    });
 
-  count += 1;
+    count += 1;
   });
   
   /*new Timer.repeating(5000, (Timer t) {
@@ -97,24 +97,9 @@ void serveFile(HttpRequest request, HttpResponse response) {
   } else {
     response.statusCode = HttpStatus.NOT_FOUND;
   }
-  
-
-  /*File file = new File.fromPath(new Path(fullPath));
-  file.exists().then((bool exists) {
-    if (exists) {
-      file.readAsString().then((String text) {
-        print(text);
-        response.outputStream.writeString('foo');
-      });
-    } else {
-      response.statusCode = HttpStatus.NOT_FOUND;
-    }
-    response.outputStream.close();
-  });*/
 }
 
 String getContentType(File file) {
-  //file.name.split('.').forEach( (substr) => print(substr) );
   return contentTypes[file.name.split('.')[1]];
 }
 
