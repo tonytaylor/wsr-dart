@@ -1,0 +1,7 @@
+# Temp and Swap files #
+*.swp
+
+# media #
+*.mp3
+*.ogg
+
