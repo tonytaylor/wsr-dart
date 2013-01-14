@@ -81,9 +81,9 @@ void serveFile(HttpRequest request, HttpResponse response) {
 
   if (file.existsSync()) {
     response.headers.set(HttpHeaders.CONTENT_TYPE, getContentType(file));
-    print(request.headers[HttpHeaders.USER_AGENT]);
-    //print(getContentType(file));
-    if (getContentType(file).startsWith('audio') == false) { 
+    //print(request.headers[HttpHeaders.USER_AGENT]);
+
+    if (isAMediaRequest(getContentType(file)) == false) { 
       file.readAsString().then((String text) {
         response.outputStream.writeString(text);
         response.outputStream.close();
@@ -116,6 +116,11 @@ void serveFile(HttpRequest request, HttpResponse response) {
 String getContentType(File file) {
   //file.name.split('.').forEach( (substr) => print(substr) );
   return contentTypes[file.name.split('.')[1]];
+}
+
+bool isAMediaRequest(String contentType) {
+  return contentType.startsWith('audio') ||
+         contentType.startsWith('video');
 }
 
 void removeConnection(WebSocketConnection connection) {
